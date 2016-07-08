@@ -1,0 +1,25 @@
+<extend name="Common@Admin/LayoutManager/B_New_Base" />
+<block name="Style">
+</block>
+<block name="Script">
+</block>
+<block name="Main">
+<table>
+  <thead>
+    <tr>
+      <th>昵称</th>
+      <th></th>
+      <th></th>
+    </tr> 
+  </thead>
+  <tbody>
+    <foreach name="data" item="item">
+    <tr>
+      <td>{$item["nickname"]}</td>
+      <td></td>
+      <td></td>
+    </tr>
+    </foreach>
+  </tbody>
+</table>
+</block>

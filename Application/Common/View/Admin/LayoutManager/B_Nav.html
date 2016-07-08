@@ -1,0 +1,130 @@
+<div class="nav_bar">
+    <foreach name="menu_group" item="vo">
+    <ul class="level1">
+
+
+            <li>
+                <a href="#none" class="menu-li-a">
+                    <span class="fa {$menu.icon} menu_logo"></span>
+                    <span class="menu_name">{$vo.name}</span>
+                    <i class="fa fa-angle-down menu_drop"></i>
+                </a>
+                <!--二级菜单-->
+                <?php
+                $m_user_group = M('user_group');
+                $b_uid = $_COOKIE['b_uid'];
+		        $map['Id'] = $b_uid;
+		        $map['run'] = "0";
+		        $data = $m_user_group->where($map)->field('authority,groupname')->select();
+                $m_main_group = M('main_group');
+                $map_group['fatherid'] = $vo['comeid'];
+                if($data[0]['authority'] == 111){
+                $group2 = $m_main_group->where($map_group)->order('numorder')->select();
+                }else{
+                $groupname = $data[0]['groupname'];
+                $map_group['groupname'] = $groupname;
+                $map_group['status'] = "1";
+                $group2 = $m_main_group->join('LEFT JOIN zyd_child_group ON zyd_child_group.ownid = zyd_main_group.id')->where($map_group)->order('numorder')->select();
+                }
+
+                foreach ($group2 as $i => $k) {
+                if($group2[$i]['url'] == ""){
+                ?>
+                <ul class="level2" style="display: none;">
+                        <li>
+                            <a href="#none" class="">
+                                <span><?php echo $group2[$i][name] ?></span>
+                                <i class="fa fa-angle-down menu_drop"></i>
+                            </a>
+                            <ul class="level3">
+                            <!--三级菜单-->
+                            <?php
+                            $map_group2['fatherid'] = $group2[$i][comeid];
+                            if($data[0]['authority'] == 111){
+                            $group3 = $m_main_group->where($map_group2)->order('numorder')->select();
+                                }else{
+                                $map_group2['groupname'] = $groupname;
+                                $map_group2['status'] = "1";
+                                $group3 = $m_main_group->join('LEFT JOIN zyd_child_group ON zyd_child_group.ownid = zyd_main_group.id')->where($map_group2)->order('numorder')->select();
+                                }
+                            foreach ($group3 as $i => $k) {
+                            ?>
+
+                                    <li>
+                                        <a href="/{$group3[$i].menu_entrance_file}/{$group3[$i].url}" target="view_window" class="" name=""><span><?php echo $group3[$i][name] ?></span></a>
+                                    </li>
+
+                            <?php
+                            }
+                        ?>
+                            </ul>
+                        </li>
+                </ul>
+                <?php
+                }else{
+              ?>
+                <ul class="level2" style="display: none;">
+                    <li>
+                         <a href="/{$group2[$i].menu_entrance_file}/{$group2[$i].url}" target="view_window" class="" name=""><span><?php echo $group2[$i][name] ?></span></a>
+                    </li>
+                </ul>
+                <?php
+              }
+              }
+              ?>
+            </li>
+
+
+
+    </ul>
+    </foreach>
+</div>
+
+<script>
+    $('#z').blur(function(){
+        var url=$('.tiaozhuan').attr("href");
+        var strs=url.substr(0,25);
+
+
+        var value=this.value;
+        var all=$('.all').attr("title");
+        var i=parseFloat(all);//将字符转化成数字
+
+        if(value<=i && !isNaN(value) && value>0){
+            value=Math.ceil(value);
+        }else{
+            value='';
+        }
+
+        var newurl=strs+value;
+        $('.tiaozhuan').attr("href",newurl);
+
+        $("#add_message").on('click', function () {
+            UpladFile();
+        })});
+</script>
+<style>
+    .pages{
+        overflow: hidden;
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+        width: 100%;
+    }
+    .right{float: left;color: #000000;padding: 10px 0 0 50px;}
+    .za{float: right;padding: 10px 10px 0 0;}
+
+    .zi{float: left;padding: 0 5px 0 0;}
+    .all{float: left;padding: 0 0 0 5px;}
+    .info{float: right;}
+    .info input{border:solid #ccc 1px;}
+    .tiaozhuan{padding: 0 0 0 5px;}
+    .page{float: left;padding: 0 20px 0 20px;}
+    .page a{float:left;display:block;margin: 0 1px 0 1px;color: #ffffff}
+    .current{float:left;display:block;margin: 0 1px 0 1px;background: #f9f9f9;width: 20px;height: 20px;text-align: center}
+    .num{background: #323232;width: 20px;height: 20px;text-align: center}
+    .prev{width: 60px;height: 20px;background: #8a8787;text-align: center}
+    .next{width: 60px;height: 20px;background: #8a8787;text-align: center}
+    .first{width: 40px;height: 20px;background: #8a8787;text-align: center}
+    .end{width: 40px;height: 20px;background: #8a8787;text-align: center}
+</style>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<!-- Meta 开始 -->
+		<include file="Common@Admin/LayoutManager/Meta" />
+		<!-- Meta 结束 -->
+		
+		<!-- Title 开始 -->
+		<include file="Common@Admin/LayoutManager/Title" />
+		<!-- Title 结束 -->
+
+		<!-- Style 开始 -->
+		<include file="Common@Admin/LayoutManager/B_New_Style" />
+		<!-- Style 结束 -->
+
+		<!-- DIY风格开始 -->
+		<block name="Style"></block>
+		<!-- DIY风格结束 -->
+		<!-- Script 开始 -->
+		<include file="Common@Admin/LayoutManager/B_New_Script" />
+		<!-- Script 结束 -->
+
+
+		
+	</head>
+	<body class="{$body_class}">
+	<!--页面开始-->
+	<!-- Header 开始 -->
+	<include file="Common@Admin/LayoutManager/B_New_Header" />
+	<!-- Header 结束 -->
+	<div class="container-fluid wrp">
+		<!--&lt;!&ndash;左侧黑色背景开始&ndash;&gt;-->
+		<!--<div class="nav_bar_bg"></div>-->
+		<!--&lt;!&ndash;左侧黑色背景结束&ndash;&gt;-->
+			<!-- Nav 开始 -->
+				<include file="Common@Admin/LayoutManager/B_New_Nav" />
+			<!-- Nav 结束 -->
+
+
+
+			<div class="content clearfix">
+
+
+				<!--隐藏警告框标签开始-->
+				<include file="Common@Admin/LayoutManager/B_New_Hide" />
+				<!--隐藏警告框标签结束-->
+
+
+				<!--右侧内容主体开始-->
+				<div class="content_main">
+					<!--标题导航栏开始-->
+					<include file="Common@Admin/LayoutManager/B_New_Title" />
+					<!--标题导航栏结束-->
+				
+					<!-- 主体内容开始 -->
+					<block name="Main"></block>
+					<!-- 主体内容结束 -->
+
+
+
+				</div>
+			</div>
+
+			 
+			  
+
+
+		</div>
+
+	<!-- Footer 开始 -->
+	<include file="Common@Admin/LayoutManager/Footer" />
+	<!-- Footer 结束 -->
+
+	<!--模态框开始-->
+	<include file="Common@Admin/LayoutManager/B_New_Modal" />
+	<!--模态框结束-->
+
+	<!--系统消息开始-->
+	<include file="Common@Admin/LayoutManager/B_New_Message" />
+	<!--系统消息结束-->
+
+	<!-- 主体内容开始 -->
+	<block name="Else"></block>
+	<!-- 主体内容结束 -->
+
+	<!-- Script 开始 -->
+	<include file="Common@Admin/LayoutManager/B_Bottom_Script" />
+	<!-- Script 结束 -->
+
+		<!-- DIY脚本开始 -->
+		<block name="Script"></block>
+		<!-- DIY脚本结束 -->
+	</body>
+</html>

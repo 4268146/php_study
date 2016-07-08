@@ -1,0 +1,11 @@
+<div class="alert_hide_tag hide">
+    <!--show:分为两种,空为不显示;非空为显示;-->
+    <!--type:分为两种,"success"为绿色背景,含义为成功;"danger"为红色背景,含义为失败;-->
+    <!--delay:分为两种,"human"为人工关闭,有关闭按钮;其他数字为自动关闭,单位为毫秒;-->
+    <!--content:为自定义内容,默认类型为字符串,即需要用""括起来.-->
+
+    <div class="alert_whether_show">{$whether_show}</div>
+    <div class="alert_tag_type">{$tag_type}</div>
+    <div class="alert_tag_delay">{$tag_delay}</div>
+    <div class="alert_tag_content"><php>echo urldecode($tag_content);</php></div>
+</div>
