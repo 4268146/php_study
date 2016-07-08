@@ -1,82 +1,57 @@
 <div class="nav_bar">
-
-
-    <ul class="nav_bar_level1">
-    <foreach name="menu_group" item="vo">
-
-
-
-
-            <li>
-                <a href="#none"><span>{$vo.name}</span></a>
-                <!--二级菜单-->
-                <?php
-                $m_user_group = M('user_group', 'zyd_');
-                $b_uid = $_COOKIE['b_uid'];
-		        $map['Id'] = $b_uid;
-		        $map['run'] = "0";
-		        $base_menu_data = $m_user_group->where($map)->field('authority,groupname')->select();
-                $m_main_group = M('main_group', 'zyd_');
-                $map_group['fatherid'] = $vo['comeid'];
-                if($base_menu_data[0]['authority'] == 111){
-                $group2 = $m_main_group->where($map_group)->order('numorder')->select();
-                }else{
-                $groupname = $base_menu_data[0]['groupname'];
-                $map_group['groupname'] = $groupname;
-                $map_group['status'] = "1";
-                $group2 = $m_main_group->join('LEFT JOIN zyd_child_group ON zyd_child_group.ownid = zyd_main_group.id')->where($map_group)->order('numorder')->select();
-                }
-
-                foreach ($group2 as $i => $k) {
-                if($group2[$i]['url'] == ""){
-                ?>
-                <ul class="nav_bar_level2">
-                    <li>
-                        <a href="#none" class="">
-                            <span><?php echo $group2[$i][name] ?></span>
-                        </a>
-                        <ul class="nav_bar_level3">
-                            <!--三级菜单-->
-                            <?php
-                            $map_group2['fatherid'] = $group2[$i][comeid];
-                            if($base_menu_data[0]['authority'] == 111){
-                            $group3 = $m_main_group->where($map_group2)->order('numorder')->select();
-                            }else{
-                            $map_group2['groupname'] = $groupname;
-                            $map_group2['status'] = "1";
-                            $group3 = $m_main_group->join('LEFT JOIN zyd_child_group ON zyd_child_group.ownid = zyd_main_group.id')->where($map_group2)->order('numorder')->select();
-                            }
-                            foreach ($group3 as $i => $k) {
-                            ?>
-
-                            <li>
-                                <a href="/{$group3[$i].menu_entrance_file}/{$group3[$i].url}" target="view_window" class="" name=""><i class="fa fa-circle"></i><span><?php echo $group3[$i][name] ?></span></a>
-                            </li>
-
-                            <?php
-                            }
-                        ?>
-                        </ul>
-                    </li>
-                </ul>
-                <?php
-                }else{
-              ?>
-                <ul class="nav_bar_level2">
-                    <li>
-                        <a href="/{$group2[$i].menu_entrance_file}/{$group2[$i].url}" target="view_window" class="" name=""><span><?php echo $group2[$i][name] ?></span></a>
-                    </li>
-                </ul>
-                <?php
-              }
-              }
-              ?>
-            </li>
-
-
-
-
-    </foreach>
-
+  <ul class="nav_bar_level1">
+    <li>
+    <a href="#"><span>student_a_1</span></a>
+    <!--二级菜单-->
+    <ul class="nav_bar_level2">
+      <li>
+      <a href="#none" class="">
+        <span>student_a_2</span>
+      </a>
+      <ul class="nav_bar_level3">
+        <!--三级菜单-->
+        <li>
+        <a href="/student_a.php" target="view_window" class="" name=""><i class="fa fa-circle"></i><span>student_a_3</span></a>
+        </li>
+      </ul>
+      </li>
     </ul>
+    </li>
+
+    <li>
+    <a href="#"><span>student_b_1</span></a>
+    <!--二级菜单-->
+    <ul class="nav_bar_level2">
+      <li>
+      <a href="#none" class="">
+        <span>student_b_2</span>
+      </a>
+      <ul class="nav_bar_level3">
+        <!--三级菜单-->
+        <li>
+        <a href="/student_b.php" target="view_window" class="" name=""><i class="fa fa-circle"></i><span>student_b_3</span></a>
+        </li>
+      </ul>
+      </li>
+    </ul>
+    </li>
+
+    <li>
+    <a href="#"><span>student_c_1</span></a>
+    <!--二级菜单-->
+    <ul class="nav_bar_level2">
+      <li>
+      <a href="#none" class="">
+        <span>student_c_2</span>
+      </a>
+      <ul class="nav_bar_level3">
+        <!--三级菜单-->
+        <li>
+        <a href="/student_c.php" target="view_window" class="" name=""><i class="fa fa-circle"></i><span>student_c_3</span></a>
+        </li>
+      </ul>
+      </li>
+    </ul>
+    </li>
+  </ul>
 </div>
